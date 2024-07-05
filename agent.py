@@ -1,5 +1,6 @@
+import openai
+import os
 from typing import TypedDict, Annotated, Sequence, Literal
-
 from functools import lru_cache
 from langchain_core.messages import BaseMessage
 from langchain_anthropic import ChatAnthropic
@@ -7,6 +8,12 @@ from langchain_openai import ChatOpenAI
 from langchain_community.tools.tavily_search import TavilySearchResults
 from langgraph.prebuilt import ToolNode
 from langgraph.graph import StateGraph, END, add_messages
+from dotenv import load_dotenv
+_ = load_dotenv()
+
+ANTHROPIC_API_KEY= os.getenv('ANTHROPIC_API_KEY')
+TAVILY_API_KEY= os.getenv('TAVILY_API_KEY')
+OPENAI_API_KEY= os.getenv('OPENAI_API_KEY')
 
 tools = [TavilySearchResults(max_results=1)]
 
