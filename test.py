@@ -9,8 +9,14 @@ from langchain_openai import ChatOpenAI
 from langchain_community.tools.tavily_search import TavilySearchResults
 from langgraph.prebuilt import ToolNode
 from langgraph.graph import StateGraph, END, add_messages
+from langsmith.wrappers import wrap_openai
+from langsmith.evaluation import evaluate
+from langsmith import Client, traceable
 from dotenv import load_dotenv
 _ = load_dotenv()
+
+# Auto-trace LLM calls in-context
+client = wrap_openai(openai.Client())
 
 ANTHROPIC_API_KEY= os.getenv('ANTHROPIC_API_KEY')
 TAVILY_API_KEY= os.getenv('TAVILY_API_KEY')
